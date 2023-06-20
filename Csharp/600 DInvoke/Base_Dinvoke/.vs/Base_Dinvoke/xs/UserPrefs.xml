@@ -1,4 +1,26 @@
 ﻿<Properties StartupConfiguration="{A5F1AAF8-0350-4814-80D8-9A841E8CFABE}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Base_Dinvoke/Win32.cs">
+    <Files>
+      <File FileName="Base_Dinvoke/Program.cs" Line="39" Column="30" />
+      <File FileName="Base_Dinvoke/Win32.cs" Line="60" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Base_Dinvoke" expanded="True">
+            <Node name="Base_Dinvoke" expanded="True">
+              <Node name="Win32.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Base__Dinvoke FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Base__Dinvoke FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

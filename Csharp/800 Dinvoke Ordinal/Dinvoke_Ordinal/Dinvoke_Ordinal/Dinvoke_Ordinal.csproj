@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DInvoke.Data">
+      <HintPath>..\..\..\..\..\..\Library\CloudStorage\OneDrive-Personal\Code &amp; Process Injection\github\Code-and-Process-Injection\submodules\DInvoke\DInvoke.ManualMap\bin\Release\netstandard2.0\DInvoke.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DInvoke.DynamicInvoke">
+      <HintPath>..\..\..\..\..\..\Library\CloudStorage\OneDrive-Personal\Code &amp; Process Injection\github\Code-and-Process-Injection\submodules\DInvoke\DInvoke.ManualMap\bin\Release\netstandard2.0\DInvoke.DynamicInvoke.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
