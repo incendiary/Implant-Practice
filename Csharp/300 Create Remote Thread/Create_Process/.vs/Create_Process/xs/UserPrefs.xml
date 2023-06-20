@@ -1,6 +1,10 @@
 ﻿<Properties StartupConfiguration="{00BA83C7-1F1D-4BC0-A976-132B73F79D90}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Create_Process/Program.cs">
+    <Files>
+      <File FileName="Create_Process/Win32.cs" Line="7" Column="6" />
+      <File FileName="Create_Process/Program.cs" Line="4" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
