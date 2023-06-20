@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{A4E5AD22-4006-40EF-9307-C12B5D0B8C4B}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Dinvoke_Api/Dinvoke_Api.csproj">
+    <Files>
+      <File FileName="Dinvoke_Api/Program.cs" Line="4" Column="1" />
+      <File FileName="Dinvoke_Api/Dinvoke_Api.csproj" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Dinvoke_Api" expanded="True">
+            <Node name="Dinvoke_Api" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Dinvoke__Api FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
