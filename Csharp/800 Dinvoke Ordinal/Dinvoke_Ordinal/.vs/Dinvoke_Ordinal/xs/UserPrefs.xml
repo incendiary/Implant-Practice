@@ -2,14 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Dinvoke_Ordinal/Win32.cs">
     <Files>
-      <File FileName="Dinvoke_Ordinal/Program.cs" Line="1" Column="1" />
-      <File FileName="Dinvoke_Ordinal/Win32.cs" Line="1" Column="1" />
+      <File FileName="Dinvoke_Ordinal/Program.cs" Line="48" Column="59" />
+      <File FileName="Dinvoke_Ordinal/Win32.cs" Line="5" Column="19" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Dinvoke_Ordinal" expanded="True">
-            <Node name="Dinvoke_Ordinal" expanded="True" selected="True" />
+            <Node name="Dinvoke_Ordinal" expanded="True" />
           </Node>
         </State>
       </Pad>
