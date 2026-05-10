@@ -1,0 +1,37 @@
+repos:
+  # Secret scanning — runs first, blocks all other hooks if a secret is found
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+
+  # C++ auto-formatting via clang-format (requires clang-format on PATH)
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v17.0.6
+    hooks:
+      - id: clang-format
+        types_or: [c, c++]
+        args: [--style=file, -i]
+
+  # C# formatting via dotnet format (requires .NET SDK on PATH)
+  # Runs per solution file to verify formatting — use `dotnet format <sln>` to fix
+  - repo: local
+    hooks:
+      - id: dotnet-format
+        name: dotnet format (verify)
+        language: system
+        entry: bash -c 'find . -name "*.sln" | while read sln; do dotnet format "$sln" --verify-no-changes --severity warn || exit 1; done'
+        pass_filenames: false
+        types: [c#]
+
+  # General hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        types_or: [c, c++, c#]
+      - id: end-of-file-fixer
+        types_or: [c, c++, c#]
+      - id: mixed-line-ending
+        args: [--fix=crlf]
+        types_or: [c, c++, c#]

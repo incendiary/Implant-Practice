@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  secret-scan:
+    name: Secret Scan (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-csharp:
+    name: Build C# Projects
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        solution:
+          - "Csharp/10 MessageBox/MessageBoxViaPinvoke/MessageBoxViaPinvoke.sln"
+          - "Csharp/100 Downloading Files/Download Files/Download Files.sln"
+          - "Csharp/200 Create Thread/CreateThread/CreateThread.sln"
+          - "Csharp/200 Create Thread/csharp-Create-Function-Delegate/Function Delegate.sln"
+          - "Csharp/300 Create Remote Thread/Create_Process/Create_Process.sln"
+          - "Csharp/300 Create Remote Thread/CreateRemoteThread/CreteRemoteThread.sln"
+          # DInvoke (600/700/800) require DInvoke.dll built from source (not on NuGet).
+          # Build locally: https://github.com/TheWover/DInvoke — then place DLLs in lib/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "6.0.x"
+      - name: Restore
+        run: dotnet restore "${{ matrix.solution }}"
+      - name: Build
+        run: dotnet build "${{ matrix.solution }}" --no-restore --configuration Release

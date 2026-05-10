@@ -1,0 +1,40 @@
+# Visual Studio / Visual Studio for Mac
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+*.exe
+*.dll
+*.pdb
+*.ilk
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+
+# C++ build artefacts
+*.o
+*.obj
+*.out
+*.a
+*.lib
+*.exp
+*.map
+
+# macOS
+.DS_Store
+*.swp
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Pre-commit
+.pre-commit-cache/
