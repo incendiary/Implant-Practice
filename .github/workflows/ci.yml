@@ -86,4 +86,4 @@ jobs:
           $inc = "${{ matrix.include }}"
           $incFlag = if ($inc) { "/I`"$inc`"" } else { "" }
           $libFlag = if ($libs) { $libs } else { "" }
-          cl.exe $src /nologo /W3 /EHsc $incFlag $libFlag /Fe"$env:TEMP\out.exe"
+          cl.exe $src /nologo /W3 /EHsc /DUNICODE /D_UNICODE $incFlag $libFlag /Fe"$env:TEMP\out.exe"
