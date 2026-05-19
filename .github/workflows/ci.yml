@@ -11,7 +11,7 @@ jobs:
     name: Secret Scan (gitleaks)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@v2
@@ -34,7 +34,7 @@ jobs:
           # DInvoke (600/700/800) require DInvoke.dll built from source (not on NuGet).
           # Build locally: https://github.com/TheWover/DInvoke — then place DLLs in lib/
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "6.0.x"
@@ -76,7 +76,7 @@ jobs:
             source: 'CPP\500 QueueUserAPC\QueueUserAPC.cpp'
             libs: ""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Compile
         shell: pwsh
