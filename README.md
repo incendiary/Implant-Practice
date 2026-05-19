@@ -20,6 +20,7 @@ This repository is intended as a learning reference and portfolio showcase of lo
 | 300 | C++ / C# / VBA | Remote process injection via CreateRemoteThread |
 | 400 | C++ | Shellcode injection via NtMapViewOfSection (section-based, avoids VirtualAllocEx) |
 | 500 | C++ | Early-bird APC injection via QueueUserAPC |
+| 600 | C++ | Beacon Object File (BOF) skeleton — inline COFF execution inside Beacon |
 | 600 | C# | Base DInvoke — dynamic API invocation to avoid static imports |
 | 700 | C# | DInvoke with API hashing (avoids function name strings in binary) |
 | 800 | C# | DInvoke by ordinal (avoids export name resolution entirely) |
@@ -89,6 +90,7 @@ clang-format -i --style=file <file.cpp>
 | #10 | ✅ Done | Add per-module README files explaining the technique and OPSEC notes |
 | #11 | ✅ Done | Remove hardcoded OneDrive paths from DInvoke `.csproj` files (privacy) |
 | #12 | ✅ Done | Enable branch protection on `main`: no force push, no deletion, gitleaks required |
+| #13 | ✅ Done | Add C++ BOF skeleton (`CPP/600 BOF/`) — beacon.h header + commented template + build/load docs |
 
 ---
 
@@ -101,7 +103,8 @@ Implant-Practice/
 │   ├── 200 Create Thread/          # Local shellcode via CreateThread + function delegate
 │   ├── 300 Create Remote Thread/   # CreateRemoteThread into spawned process
 │   ├── 400 NTMapViewOfSection/     # Section-based injection via Nt* APIs
-│   └── 500 QueueUserAPC/           # Early-bird APC injection
+│   ├── 500 QueueUserAPC/           # Early-bird APC injection
+│   └── 600 BOF/                   # Beacon Object File skeleton (beacon.h + bof_template.c)
 ├── Csharp/
 │   ├── 10 MessageBox/              # P/Invoke MessageBoxW
 │   ├── 100 Downloading Files/      # HttpClient download
