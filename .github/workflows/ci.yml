@@ -42,3 +42,52 @@ jobs:
         run: dotnet restore "${{ matrix.solution }}"
       - name: Build
         run: dotnet build "${{ matrix.solution }}" --no-restore --configuration Release
+
+  build-cpp:
+    name: Build C++ (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "100 download"
+            source: "CPP/100 Downloading Files/download.cpp"
+            flags: "-lwinhttp"
+          - name: "200 CreateThread"
+            source: "CPP/200 Create Thread/CreateThread.cpp"
+            flags: "-lwinhttp"
+          - name: "200 FunctionDelegate"
+            source: "CPP/200 Create Thread/FunctionDelegate.cpp"
+            flags: "-lwinhttp"
+          - name: "300 CreateRemoteThread"
+            source: "CPP/300 Create Remote Thread/CreateRemoteThread.cpp"
+            flags: "-lwinhttp"
+          - name: "300 createThread"
+            source: "CPP/300 Create Remote Thread/createThread.cpp"
+            flags: ""
+          # 400 NTMapViewOfSection: includes "Native.h" from the same directory,
+          # plus <winternl.h> and WINHTTP_FLAG_SECURE_DEFAULTS (SDK 10+).
+          # mingw-w64 on Ubuntu ships winternl.h but may lack the latest WinHTTP
+          # constants; compiled with -I to pick up Native.h.
+          - name: "400 NtMapViewOfSection"
+            source: "CPP/400 NTMapViewOfSection/NtMapViewOfSection.cpp"
+            include_dir: "CPP/400 NTMapViewOfSection"
+            flags: "-lwinhttp"
+          - name: "500 QueueUserAPC"
+            source: "CPP/500 QueueUserAPC/QueueUserAPC.cpp"
+            flags: "-lwinhttp"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mingw-w64
+        run: sudo apt-get update -q && sudo apt-get install -y -q mingw-w64
+      - name: Compile
+        run: |
+          INCLUDE_FLAG=""
+          if [ -n "${{ matrix.include_dir }}" ]; then
+            INCLUDE_FLAG="-I${{ matrix.include_dir }}"
+          fi
+          x86_64-w64-mingw32-g++ -Wall \
+            "${{ matrix.source }}" \
+            $INCLUDE_FLAG \
+            ${{ matrix.flags }} \
+            -o /tmp/out.exe
