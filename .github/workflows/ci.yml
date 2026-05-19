@@ -42,3 +42,48 @@ jobs:
         run: dotnet restore "${{ matrix.solution }}"
       - name: Build
         run: dotnet build "${{ matrix.solution }}" --no-restore --configuration Release
+
+  build-cpp:
+    name: Build C++ (${{ matrix.name }})
+    # Windows runner required: all exercises use <Windows.h> and Win32 APIs.
+    # ubuntu-latest has case-sensitive paths — Windows.h vs windows.h fails.
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "100 download"
+            source: 'CPP\100 Downloading Files\download.cpp'
+            libs: "winhttp.lib"
+          - name: "200 CreateThread"
+            source: 'CPP\200 Create Thread\CreateThread.cpp'
+            libs: ""
+          - name: "200 FunctionDelegate"
+            source: 'CPP\200 Create Thread\FunctionDelegate.cpp'
+            libs: ""
+          - name: "300 CreateRemoteThread"
+            source: 'CPP\300 Create Remote Thread\CreateRemoteThread.cpp'
+            libs: ""
+          - name: "300 createThread"
+            source: 'CPP\300 Create Remote Thread\createThread.cpp'
+            libs: ""
+          - name: "400 NtMapViewOfSection"
+            # Native.h lives in the same directory — add it as an include path
+            source: 'CPP\400 NTMapViewOfSection\NtMapViewOfSection.cpp'
+            libs: "ntdll.lib"
+            include: 'CPP\400 NTMapViewOfSection'
+          - name: "500 QueueUserAPC"
+            source: 'CPP\500 QueueUserAPC\QueueUserAPC.cpp'
+            libs: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Compile
+        shell: pwsh
+        run: |
+          $src = "${{ matrix.source }}"
+          $libs = "${{ matrix.libs }}"
+          $inc = "${{ matrix.include }}"
+          $incFlag = if ($inc) { "/I`"$inc`"" } else { "" }
+          $libFlag = if ($libs) { $libs } else { "" }
+          cl.exe $src /nologo /W3 /EHsc /DUNICODE /D_UNICODE $incFlag $libFlag /Fe"$env:TEMP\out.exe"
